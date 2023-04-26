@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sss.dao.TFeedTopicDao">
+
+    <!--添加-->
+	<insert id="add" parameterType="sss.entity.TFeedTopicEntity">
+		insert into `t_feed_topic`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="feedId != null">
+                feed_id,
+            </if>
+            <if test="topicId != null">
+                topic_id,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="feedId != null">
+					#{feedId},
+				</if>
+				<if test="topicId != null">
+					#{topicId},
+				</if>
+				<if test="state != null">
+					#{state},
+				</if>
+				<if test="createTime != null">
+					#{createTime},
+				</if>
+				<if test="updateTime != null">
+					#{updateTime},
+				</if>
+		</trim>
+	</insert>
+
+    <!--删除-->
+	<delete id="delete" parameterType="sss.entity.TFeedTopicEntity">
+		delete from `t_feed_topic`
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</delete>
+
+    <!--更新-->
+	<update id="update" parameterType="sss.entity.TFeedTopicEntity">
+		update `t_feed_topic`
+		<trim prefix="set" suffixOverrides=",">
+				<if test="id != null">
+					id=#{id},
+				</if>
+				<if test="feedId != null">
+					feed_id=#{feedId},
+				</if>
+				<if test="topicId != null">
+					topic_id=#{topicId},
+				</if>
+				<if test="state != null">
+					state=#{state},
+				</if>
+				<if test="createTime != null">
+					create_time=#{createTime},
+				</if>
+				<if test="updateTime != null">
+					update_time=#{updateTime},
+				</if>
+		</trim>
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</update>
+
+    <!--固定条件查询-->
+	<select id="select" parameterType="sss.entity.TFeedTopicEntity"
+		resultType="sss.entity.TFeedTopicEntity">
+			select
+				id as "id",
+				feed_id as "feedId",
+				topic_id as "topicId",
+				state as "state",
+				create_time as "createTime",
+				update_time as "updateTime"
+			from `t_feed_topic`
+			<where>
+					<if test="id != null">
+						and id=#{id}
+					</if>
+					<if test="feedId != null">
+						and feed_id=#{feedId}
+					</if>
+					<if test="topicId != null">
+						and topic_id=#{topicId}
+					</if>
+					<if test="state != null">
+						and state=#{state}
+					</if>
+					<if test="createTime != null">
+						and create_time=#{createTime}
+					</if>
+					<if test="updateTime != null">
+						and update_time=#{updateTime}
+					</if>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊查询的公共条件）-->
+    <sql id="likeSelectConditions">
+                <if test="id != null and id != '' ">
+                and id <![CDATA[=]]> #{id}
+                </if>
+                <if test="feedId != null and feedId != '' ">
+                and feed_id <![CDATA[=]]> #{feedId}
+                </if>
+                <if test="topicId != null and topicId != '' ">
+                and topic_id <![CDATA[=]]> #{topicId}
+                </if>
+    </sql>
+
+    <!--分页（模糊）查询-->
+	<select id="likeSelect" parameterType="sss.entity.TFeedTopicEntity"
+		resultType="sss.entity.TFeedTopicEntity">
+			select
+				id as "id",
+				feed_id as "feedId",
+				topic_id as "topicId",
+				state as "state",
+				create_time as "createTime",
+				update_time as "updateTime"
+
+                from `t_feed_topic`
+
+			<where>
+                <include refid="likeSelectConditions"/>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊）查询条数-->
+	<select id="likeSelectCount" parameterType="sss.entity.TFeedTopicEntity"
+		resultType="java.lang.Long">
+		select
+			count(1)
+		from `t_feed_topic`
+
+		<where>
+            <include refid="likeSelectConditions"/>
+		</where>
+	</select>
+
+</mapper>

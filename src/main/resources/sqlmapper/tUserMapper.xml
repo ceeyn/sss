@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sss.dao.TUserDao">
+
+    <!--添加-->
+	<insert id="add" parameterType="sss.entity.TUserEntity">
+		insert into `t_user`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="signature != null">
+                signature,
+            </if>
+            <if test="imToken != null">
+                im_token,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="uid != null">
+					#{uid},
+				</if>
+				<if test="username != null">
+					#{username},
+				</if>
+				<if test="password != null">
+					#{password},
+				</if>
+				<if test="phone != null">
+					#{phone},
+				</if>
+				<if test="sex != null">
+					#{sex},
+				</if>
+				<if test="qq != null">
+					#{qq},
+				</if>
+				<if test="avatar != null">
+					#{avatar},
+				</if>
+				<if test="signature != null">
+					#{signature},
+				</if>
+				<if test="imToken != null">
+					#{imToken},
+				</if>
+				<if test="state != null">
+					#{state},
+				</if>
+				<if test="loginTime != null">
+					#{loginTime},
+				</if>
+				<if test="createTime != null">
+					#{createTime},
+				</if>
+				<if test="updateTime != null">
+					#{updateTime},
+				</if>
+		</trim>
+	</insert>
+
+    <!--删除-->
+	<delete id="delete" parameterType="sss.entity.TUserEntity">
+		delete from `t_user`
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</delete>
+
+    <!--更新-->
+	<update id="update" parameterType="sss.entity.TUserEntity">
+		update `t_user`
+		<trim prefix="set" suffixOverrides=",">
+				<if test="id != null">
+					id=#{id},
+				</if>
+				<if test="uid != null">
+					uid=#{uid},
+				</if>
+				<if test="username != null">
+					username=#{username},
+				</if>
+				<if test="password != null">
+					password=#{password},
+				</if>
+				<if test="phone != null">
+					phone=#{phone},
+				</if>
+				<if test="sex != null">
+					sex=#{sex},
+				</if>
+				<if test="qq != null">
+					qq=#{qq},
+				</if>
+				<if test="avatar != null">
+					avatar=#{avatar},
+				</if>
+				<if test="signature != null">
+					signature=#{signature},
+				</if>
+				<if test="imToken != null">
+					im_token=#{imToken},
+				</if>
+				<if test="state != null">
+					state=#{state},
+				</if>
+				<if test="loginTime != null">
+					login_time=#{loginTime},
+				</if>
+				<if test="createTime != null">
+					create_time=#{createTime},
+				</if>
+				<if test="updateTime != null">
+					update_time=#{updateTime},
+				</if>
+		</trim>
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</update>
+
+    <!--固定条件查询-->
+	<select id="select" parameterType="sss.entity.TUserEntity"
+		resultType="sss.entity.TUserEntity">
+			select
+				id as "id",
+				uid as "uid",
+				username as "username",
+				password as "password",
+				phone as "phone",
+				sex as "sex",
+				qq as "qq",
+				avatar as "avatar",
+				signature as "signature",
+				im_token as "imToken",
+				state as "state",
+				login_time as "loginTime",
+				create_time as "createTime",
+				update_time as "updateTime"
+			from `t_user`
+			<where>
+					<if test="id != null">
+						and id=#{id}
+					</if>
+					<if test="uid != null">
+						and uid=#{uid}
+					</if>
+					<if test="username != null">
+						and username=#{username}
+					</if>
+					<if test="password != null">
+						and password=#{password}
+					</if>
+					<if test="phone != null">
+						and phone=#{phone}
+					</if>
+					<if test="sex != null">
+						and sex=#{sex}
+					</if>
+					<if test="qq != null">
+						and qq=#{qq}
+					</if>
+					<if test="avatar != null">
+						and avatar=#{avatar}
+					</if>
+					<if test="signature != null">
+						and signature=#{signature}
+					</if>
+					<if test="imToken != null">
+						and im_token=#{imToken}
+					</if>
+					<if test="state != null">
+						and state=#{state}
+					</if>
+					<if test="loginTime != null">
+						and login_time=#{loginTime}
+					</if>
+					<if test="createTime != null">
+						and create_time=#{createTime}
+					</if>
+					<if test="updateTime != null">
+						and update_time=#{updateTime}
+					</if>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊查询的公共条件）-->
+    <sql id="likeSelectConditions">
+                <if test="id != null and id != '' ">
+                and id <![CDATA[=]]> #{id}
+                </if>
+                <if test="uid != null and uid != '' ">
+                and uid <![CDATA[=]]> #{uid}
+                </if>
+                <if test="username != null and username != '' ">
+                and username <![CDATA[=]]> #{username}
+                </if>
+                <if test="password != null and password != '' ">
+                and password <![CDATA[=]]> #{password}
+                </if>
+                <if test="phone != null and phone != '' ">
+                and phone <![CDATA[=]]> #{phone}
+                </if>
+                <if test="sex != null and sex != '' ">
+                and sex <![CDATA[=]]> #{sex}
+                </if>
+                <if test="qq != null and qq != '' ">
+                and qq <![CDATA[=]]> #{qq}
+                </if>
+                <if test="avatar != null and avatar != '' ">
+                and avatar <![CDATA[=]]> #{avatar}
+                </if>
+                <if test="signature != null and signature != '' ">
+                and signature <![CDATA[=]]> #{signature}
+                </if>
+                <if test="imToken != null and imToken != '' ">
+                and im_token <![CDATA[=]]> #{imToken}
+                </if>
+                <if test="state != null and state != '' ">
+                and state <![CDATA[=]]> #{state}
+                </if>
+                <if test="loginTime != null and loginTime != '' ">
+                and login_time <![CDATA[=]]> #{loginTime}
+                </if>
+                <if test="createTime != null and createTime != '' ">
+                and create_time <![CDATA[=]]> #{createTime}
+                </if>
+                <if test="updateTime != null and updateTime != '' ">
+                and update_time <![CDATA[=]]> #{updateTime}
+                </if>
+    </sql>
+
+    <!--分页（模糊）查询-->
+	<select id="likeSelect" parameterType="sss.entity.TUserEntity"
+		resultType="sss.entity.TUserEntity">
+			select
+				id as "id",
+				uid as "uid",
+				username as "username",
+				password as "password",
+				phone as "phone",
+				sex as "sex",
+				qq as "qq",
+				avatar as "avatar",
+				signature as "signature",
+				im_token as "imToken",
+				state as "state",
+				login_time as "loginTime",
+				create_time as "createTime",
+				update_time as "updateTime"
+
+                from `t_user`
+
+			<where>
+                <include refid="likeSelectConditions"/>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊）查询条数-->
+	<select id="likeSelectCount" parameterType="sss.entity.TUserEntity"
+		resultType="java.lang.Long">
+		select
+			count(1)
+		from `t_user`
+
+		<where>
+            <include refid="likeSelectConditions"/>
+		</where>
+	</select>
+
+</mapper>

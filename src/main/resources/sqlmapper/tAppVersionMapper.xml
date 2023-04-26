@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="sss.dao.TAppVersionDao">
+
+    <!--添加-->
+	<insert id="add" parameterType="sss.entity.TAppVersionEntity">
+		insert into `t_app_version`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="versionName != null">
+                version_name,
+            </if>
+            <if test="versionCode != null">
+                version_code,
+            </if>
+            <if test="updateFlag != null">
+                update_flag,
+            </if>
+            <if test="updateInfo != null">
+                update_info,
+            </if>
+            <if test="apkName != null">
+                apk_name,
+            </if>
+            <if test="apkUrl != null">
+                apk_url,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="id != null">
+					#{id},
+				</if>
+				<if test="versionName != null">
+					#{versionName},
+				</if>
+				<if test="versionCode != null">
+					#{versionCode},
+				</if>
+				<if test="updateFlag != null">
+					#{updateFlag},
+				</if>
+				<if test="updateInfo != null">
+					#{updateInfo},
+				</if>
+				<if test="apkName != null">
+					#{apkName},
+				</if>
+				<if test="apkUrl != null">
+					#{apkUrl},
+				</if>
+				<if test="createTime != null">
+					#{createTime},
+				</if>
+				<if test="updateTime != null">
+					#{updateTime},
+				</if>
+		</trim>
+	</insert>
+
+    <!--删除-->
+	<delete id="delete" parameterType="sss.entity.TAppVersionEntity">
+		delete from `t_app_version`
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</delete>
+
+    <!--更新-->
+	<update id="update" parameterType="sss.entity.TAppVersionEntity">
+		update `t_app_version`
+		<trim prefix="set" suffixOverrides=",">
+				<if test="id != null">
+					id=#{id},
+				</if>
+				<if test="versionName != null">
+					version_name=#{versionName},
+				</if>
+				<if test="versionCode != null">
+					version_code=#{versionCode},
+				</if>
+				<if test="updateFlag != null">
+					update_flag=#{updateFlag},
+				</if>
+				<if test="updateInfo != null">
+					update_info=#{updateInfo},
+				</if>
+				<if test="apkName != null">
+					apk_name=#{apkName},
+				</if>
+				<if test="apkUrl != null">
+					apk_url=#{apkUrl},
+				</if>
+				<if test="createTime != null">
+					create_time=#{createTime},
+				</if>
+				<if test="updateTime != null">
+					update_time=#{updateTime},
+				</if>
+		</trim>
+		<where>
+            <if test="id != null">
+                and id=#{id}
+            </if>
+            <if test="id == null">
+                and 1 = 0
+            </if>
+		</where>
+	</update>
+
+    <!--固定条件查询-->
+	<select id="select" parameterType="sss.entity.TAppVersionEntity"
+		resultType="sss.entity.TAppVersionEntity">
+			select
+				id as "id",
+				version_name as "versionName",
+				version_code as "versionCode",
+				update_flag as "updateFlag",
+				update_info as "updateInfo",
+				apk_name as "apkName",
+				apk_url as "apkUrl",
+				create_time as "createTime",
+				update_time as "updateTime"
+			from `t_app_version`
+			<where>
+					<if test="id != null">
+						and id=#{id}
+					</if>
+					<if test="versionName != null">
+						and version_name=#{versionName}
+					</if>
+					<if test="versionCode != null">
+						and version_code=#{versionCode}
+					</if>
+					<if test="updateFlag != null">
+						and update_flag=#{updateFlag}
+					</if>
+					<if test="updateInfo != null">
+						and update_info=#{updateInfo}
+					</if>
+					<if test="apkName != null">
+						and apk_name=#{apkName}
+					</if>
+					<if test="apkUrl != null">
+						and apk_url=#{apkUrl}
+					</if>
+					<if test="createTime != null">
+						and create_time=#{createTime}
+					</if>
+					<if test="updateTime != null">
+						and update_time=#{updateTime}
+					</if>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊查询的公共条件）-->
+    <sql id="likeSelectConditions">
+                <if test="id != null and id != '' ">
+                and id <![CDATA[=]]> #{id}
+                </if>
+                <if test="versionName != null and versionName != '' ">
+                and version_name <![CDATA[=]]> #{versionName}
+                </if>
+                <if test="versionCode != null and versionCode != '' ">
+                and version_code <![CDATA[=]]> #{versionCode}
+                </if>
+                <if test="updateFlag != null and updateFlag != '' ">
+                and update_flag <![CDATA[=]]> #{updateFlag}
+                </if>
+                <if test="updateInfo != null and updateInfo != '' ">
+                and update_info <![CDATA[=]]> #{updateInfo}
+                </if>
+                <if test="apkName != null and apkName != '' ">
+                and apk_name <![CDATA[=]]> #{apkName}
+                </if>
+                <if test="apkUrl != null and apkUrl != '' ">
+                and apk_url <![CDATA[=]]> #{apkUrl}
+                </if>
+                <if test="createTime != null and createTime != '' ">
+                and create_time <![CDATA[=]]> #{createTime}
+                </if>
+                <if test="updateTime != null and updateTime != '' ">
+                and update_time <![CDATA[=]]> #{updateTime}
+                </if>
+    </sql>
+
+    <!--分页（模糊）查询-->
+	<select id="likeSelect" parameterType="sss.entity.TAppVersionEntity"
+		resultType="sss.entity.TAppVersionEntity">
+			select
+				id as "id",
+				version_name as "versionName",
+				version_code as "versionCode",
+				update_flag as "updateFlag",
+				update_info as "updateInfo",
+				apk_name as "apkName",
+				apk_url as "apkUrl",
+				create_time as "createTime",
+				update_time as "updateTime"
+
+                from `t_app_version`
+
+			<where>
+                <include refid="likeSelectConditions"/>
+			</where>
+			<if test="orderStr != '' and orderStr != null">
+				order by ${orderStr}
+			</if>
+            <if test="start != null and pageSize != null">
+                limit #{start},#{pageSize}
+            </if>
+
+
+	</select>
+
+    <!--分页（模糊）查询条数-->
+	<select id="likeSelectCount" parameterType="sss.entity.TAppVersionEntity"
+		resultType="java.lang.Long">
+		select
+			count(1)
+		from `t_app_version`
+
+		<where>
+            <include refid="likeSelectConditions"/>
+		</where>
+	</select>
+
+</mapper>
